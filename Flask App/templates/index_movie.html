@@ -1,0 +1,90 @@
+<style>
+    
+form.search {
+  box-sizing: border-box;
+  width: 50%;
+  top: 40%;
+  left: 25%;
+  position: relative;
+}
+
+/* Style the search field */
+form.search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.search button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Movie Search and Recommender System
+  </title>
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form class="search">
+  <input id="search_input" type="text" placeholder="Search by movie title, cast, genre, director name, etc...." name="search">
+  <button id="submit_button" type="submit" onclick="myFunction()"><i class="fa fa-search"></i></button>
+</form>
+
+<script>
+  const searchButton = document.getElementById('submit_button');
+  const searchInput = document.getElementById('search_input');
+  searchButton.addEventListener('click', () => {
+    const inputValue = searchInput.value;
+    alert(inputValue);
+  });
+
+  function myFunction() {
+  var search= $('#search_input').val();
+    $.ajax({
+                url: "/join",
+                type: "POST",
+                data: {search_text:search_text}
+            }).done(function(response) {
+              var html= "<br><br><br><p> <b> RESULT : <b><p>";
+              response =response.result;
+                   $.each(response,function(key,val){
+                   console.log(val);
+                      html+="<p>"+val+"<p>"
+                  });
+                  html +="<br>";
+                  $(".show-data").append(html);
+              });
+  };
+</script>
+
+</body>
+</html>
