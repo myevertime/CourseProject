@@ -1,0 +1,49 @@
+SELECT DISTINCT ?movieLabel ?movie_id
+WITH 
+{
+SELECT ?item ?actors ?director
+{
+      {?item wdt:P4947 '$TMDB'.}
+      
+      UNION
+      {?item wdt:P345 '$IMDB'.}
+      ?item wdt:P161 | wdt:P725 ?actors;
+            wdt:P57 ?director.
+      ?actors wdt:P166 ?awards
+}
+GROUP BY ?item ?actors ?director
+ORDER BY DESC(COUNT(?awards))
+LIMIT 1
+} AS %get_actor
+WITH
+{
+SELECT ?movie (COUNT(?genre) as ?count)  
+WHERE
+{
+INCLUDE %get_actor
+?item wdt:P136 ?genre.      
+?movie wdt:P31/wdt:P279* wd:Q11424;
+    wdt:P136 ?genre;
+{?movie wdt:P161 ?actors}
+UNION
+{?movie  wdt:P57 ?director. }
+}
+GROUP BY ?movie 
+} AS %get_movie
+WHERE
+{
+INCLUDE %get_actor
+INCLUDE %get_movie 
+OPTIONAL {?movie wdt:P4947 ?tmdb_id}
+OPTIONAL {?movie wdt:P345 ?imdb_id}
+BIND(COALESCE(?imdb_id, ?tmdb_id) AS ?movie_id).
+FILTER(!ISBLANK(?movie_id))
+MINUS  
+{
+{?movie wdt:P4947 '$TMDB'} UNION {?movie wdt:P345 '$IMDB'.}
+}
+SERVICE wikibase:label {
+     bd:serviceParam wikibase:language "en" .}
+}
+ORDER BY DESC(?count)
+LIMIT 10

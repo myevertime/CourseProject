@@ -1,0 +1,32 @@
+SELECT ?movieLabel ?movie_id
+WHERE
+{
+{?item wdt:P4947 '$TMDB'.}
+UNION
+{?item wdt:P345 '$IMDB'.}
+      
+{?item p:P161[pq:P453 ?character;]}
+UNION
+{?item p:P725[pq:P453 ?character;]}
+  
+?movie wdt:P31/wdt:P279* wd:Q11424;
+{?movie p:P161 [pq:P453 ?character;]}
+UNION
+{?movie p:P725 [pq:P453 ?character;]}
+
+OPTIONAL {?movie wdt:P4947 ?tmdb_id}
+OPTIONAL {?movie wdt:P345 ?imdb_id}
+
+BIND(COALESCE(?imdb_id, ?tmdb_id) AS ?movie_id).
+FILTER ( ?character not in (wd:Q18086706) && !ISBLANK(?movie_id)) #exclude char labeled as "themselves"
+
+MINUS  
+{
+{?movie wdt:P4947 '$TMDB'} UNION {?movie wdt:P345 '$IMDB'.}
+}
+
+SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+GROUP BY ?movieLabel ?movie_id
+ORDER BY DESC(COUNT(?character))
+LIMIT 10
