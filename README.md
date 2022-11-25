@@ -1,14 +1,18 @@
 # UIUC CS410 Course Project
 ## Team ACT
 > Hyeonjae Cho, hc53@illinois.edu
+> 
 > Xi Chen, xi12@illinois.edu
+> 
 > Sean Kan, clkan2@illinois.edu
+> 
 > Danwoo Park, danwoop2@illinois.edu
+> 
 > Kihyuk Song, kihyuks2@illinois.edu
 
 
 Our team built a movie recommendation system that gets input on any queries and returns a list of relevant films, along with their corresponding keywords and taglines. The user can then go through the results, pick films that spark their interest, and get a list of recommendations that are similar to what they like.
-The movie recommendation system will be built using publicly available information from the following databases:
+The movie recommendation system is built using publicly available information from the following databases:
 - MovieLens 25M datasets for movie titles, genres, tags, and user ratings
 -- https://grouplens.org/datasets/movielens/25m/
 - IMDB for cast and director names
