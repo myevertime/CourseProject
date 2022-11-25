@@ -21,7 +21,7 @@ The movie recommendation system is built using publicly available data from the 
 - WikiData for creating a knowledge graph that describes real-world entities and captures the relationships between them.
 -- https://query.wikidata.org/
 
-The reason why our team chose a recommendation system is that as the lecture says, future intelligent information systems are expected to be highly personalized and alleviate users’ effort to perform a task. The recommendation system is the way the information system desires to be. In addition, this project is important in that we are trying to utilize the WikiData Knowledge Graph algorithm, which is a state-of-the-art recommendation algorithm.
+The reason why our team chose a recommendation system is that as the lecture says, future intelligent information systems are expected to be highly personalized and alleviate users’ effort to perform a task. The recommendation system is the way the information system desires to be. In addition, this project would be influential in that we are trying to utilize the WikiData Knowledge Graph algorithm, which is a state-of-the-art recommendation algorithm.
 
 #### Data
 Data files are available in https://drive.google.com/drive/folders/1NUS5DCtIsa8MZn0Hd-yRoCGbEbWlKWaT?usp=sharing.
