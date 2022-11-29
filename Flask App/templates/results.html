@@ -57,55 +57,31 @@ p {
 
 <html>
     <div class="search_content">
-        <h1>xxx results found for: <span class="text-navy">{{ name }}</span></h2>
+        <h1>{{ length }} results found for: {{ search }}</span></h2>
 
         <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
-        </div>
-
+        {% for movie in results %}
+            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
+            <p>{{ movie.director }}</p>
+            <p>{{ movie.cast }}</p>
+            <p>{{ movie.description }}</p>
         <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
+        {% endfor %}
         </div>
-
-        <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
-        </div>
-        <div class="hr_line_dashed"></div>
     </div>
 
     <div class="recommendation_content">
         <h1>You may also be interested in these movies:</h1>
 
         <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
-        </div>
-
+        {% for movie in recommendations %}
+            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
+            <p>{{ movie.director }}</p>
+            <p>{{ movie.cast }}</p>
+            <p>{{ movie.description }}</p>
         <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
+        {% endfor %}
         </div>
-
-        <div class="hr_line_dashed"></div>
-        <div class="search_result">
-            <h2><a href="#">Movie Title | Year</a></h2>
-            <p>Cast | Director</p>
-            <p>Movie description</p>
-        </div>
-        <div class="hr_line_dashed"></div>
     </div>
 
 </html>
