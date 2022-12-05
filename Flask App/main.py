@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
-from CF import similar_5movies
+#from processor import processor
 
 app = Flask(__name__)
 
@@ -15,54 +15,47 @@ def results():
     search = request.form.get('search') # this is the search term
 
     #################################################
-    # add back-end processing codes for search here #
-    # input: search (string)
-    # output: list of dictionary items, variables = title, year, director, cast, description 
+    # comment out the dummy results and recommendations lists
+    # uncomment the following 2 lines:
+    # from processor import processor
+    # results, recommendations = processor(search)
     #################################################
 
     results = [
         {
             'title': 'Movie Title 1',
-            'year': '2022',
+            'genre': 'adventure',
             'director': 'Director 1',
-            'cast': 'Cast1, Cast2',
-            'description': 'Description 1'
+            'actors': 'Cast1, Cast2',
         },
 
         {
             'title': 'Movie Title 2',
-            'year': '2021',
+            'genre': 'thriller',
             'director': 'Director 2',
-            'cast': 'Cast1, Cast2',
-            'description': 'Description 2'
+            'actors': 'Cast1, Cast2',
         }
     ]
-    length=len(results)
-
-    ##########################################################
-    # add back-end processing codes for recommendations here #
-    # input: search (string)
-    # output: list of dictionary items, variables = title, year, director, cast, description 
-    ##########################################################
-    #results = similar_5movies('Dirty Dancing (1987)')
 
     recommendations = [
         {
             'title': 'Movie Title 3',
             'year': '2020',
             'director': 'Director 3',
-            'cast': 'Cast1, Cast2',
-            'description': 'Description 3'
+            'actors': 'Cast1, Cast2',
         },
 
         {
             'title': 'Movie Title 4',
             'year': '2019',
             'director': 'Director 4',
-            'cast': 'Cast1, Cast2',
-            'description': 'Description 4'
+            'actors': 'Cast1, Cast2',
         }
     ]
+
+    #results, recommendations = processor(search)
+    length=len(results)
+
     return render_template("results.html", search=search, length=length, results=results, recommendations=recommendations)
 
 if __name__ == "__main__":

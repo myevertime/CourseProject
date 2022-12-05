@@ -1,7 +1,9 @@
 <style>
 body{
-background:#eee;
-}                
+background: white;
+}
+
+
 .search_content {
     background-color: #FFFFFF;
     color: inherit;
@@ -13,7 +15,7 @@ background:#eee;
     width: 45%;
     position: absolute;
     left: 0%;
-    top:  0%;
+    top:  10%;
 }
 
 .hr_line_dashed {
@@ -35,17 +37,23 @@ background:#eee;
     width: 45%;
     position: absolute;
     left: 50%;
-    top:  0%;
+    top:  10%;
 }
 
 h1 {
     font-size: 24px;
-    font-weight: 100;
+    font-weight: bold;
 }
 
 h2 {
 	font-size: 20px;
     font-weight: 100;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 100;
+    text-decoration: underline;
 }
 
 p {
@@ -56,32 +64,39 @@ p {
 </style>
 
 <html>
+    <button style="height:40px; width:130px; font-size:20px;" onclick="history.back()">Go Back</button>
+
     <div class="search_content">
-        <h1>{{ length }} results found for: {{ search }}</span></h2>
+        <h1>Search Results</h1>
+        <div class="hr_line_dashed"></div>
+
+        <h2>{{ length }} results found for: {{ search }}</span></h2>
 
         <div class="hr_line_dashed"></div>
         {% for movie in results %}
-            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
-            <p>{{ movie.director }}</p>
-            <p>{{ movie.cast }}</p>
-            <p>{{ movie.description }}</p>
+            <h3>{{ movie.title }}</h2>
+            <p>Genre: {{ movie.genre}}
+            <p>Director: {{ movie.director }}</p>
+            <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
         {% endfor %}
         </div>
     </div>
 
     <div class="recommendation_content">
-        <h1>You may also be interested in these movies:</h1>
+        <h1>Recommendations</h1>
+        <div class="hr_line_dashed"></div>
+
+        <h2>You may also be interested in these movies:</h2>
 
         <div class="hr_line_dashed"></div>
         {% for movie in recommendations %}
-            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
-            <p>{{ movie.director }}</p>
-            <p>{{ movie.cast }}</p>
-            <p>{{ movie.description }}</p>
+            <h3>{{ movie.title }}</h3>
+            <p>Genre: {{ movie.genre}}
+            <p>Director: {{ movie.director }}</p>
+            <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
         {% endfor %}
         </div>
     </div>
-
 </html>
