@@ -1,4 +1,4 @@
-SELECT ?movieLabel ?movie_id
+SELECT ?movie_id
 WITH
 {
 SELECT DISTINCT ?movie ?subject ?movie_id
@@ -27,9 +27,8 @@ WHERE {
 WHERE
 {
 INCLUDE %get_movie
-SERVICE wikibase:label {
-	bd:serviceParam wikibase:language "en" .}       
+    
 }
-GROUP BY ?movieLabel ?movie_id
+GROUP BY ?movie_id
 ORDER BY DESC(COUNT(?subject))
 LIMIT 10
