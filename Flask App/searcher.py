@@ -12,13 +12,8 @@ def search(raw_query):
     results = []
     for _, (d_id, _) in enumerate(top_docs):
         content = movie_data[d_id+1].split(",")
-        # content = inv_idx.metadata(d_id).get('content')
-        title = content[1]
-        imdb_id = content[2]
-        tmdb_id = content[3]
-        genres = content[4]
-        results.append({"title": title, "genre": genres, "imdb_id": imdb_id, "tmdb_id": tmdb_id})
-    print(json.dumps(results, indent=4))
+        movie_id = content[0]
+        results.append(int(movie_id))
     return results
 
 if __name__ == '__main__':
@@ -40,4 +35,4 @@ if __name__ == '__main__':
         print('\n========Search: ')
         user_query_text = input()
 
-        search(user_query_text)
+        print(search(user_query_text))
