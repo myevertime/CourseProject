@@ -117,7 +117,7 @@ def recom_5movie(user):
                 num = 1
             recom[j] = num
     five_movies = sorted(recom.items(), key = lambda x:x[1], reverse = True)[:5]
-    return five_movies # [(movieId, number of recommenders), ...]
+    return list(dict(five_movies)) # [movieId1, movieId2, ...]
         
         
 def recom_5movie_print(user):
