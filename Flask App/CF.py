@@ -3,21 +3,47 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
+import pickle # for create pickle file
 
+"""
+####################################### Read and process the original file before creating the pickle file
 output = pd.read_csv('output.csv')
 ratings = pd.read_csv('ratings.csv')
+output.head()
+ratings.head()
 
+
+# null = 0
 ratings.rating.replace({0 : np.nan}, regex = True, inplace = True)
+
+# rating ratio
 ratings.groupby("rating").count().iloc[:, :1] / ratings.count().userId * 100
 
 # output + ratings
 output_ratings = ratings.merge(output, left_on = 'movieId', right_on = 'movieId')
+output_ratings.head()
 
+# making match_df for movieId - title matching
 match_df = output_ratings[['movieId', 'title']]
 match_df.drop_duplicates(inplace = True)
+match_df.head()
 
+# making input for pivoting
 pivot_input = output_ratings[['userId', 'movieId', 'rating']]
-pivot_input = pivot_input[pivot_input.userId <= 8500]  # processing error with file size
+pivot_input = pivot_input[pivot_input.userId <= 6500]  # processing error with file size
+
+######################################## Create pickle file for github upload (< 25MB file size)
+with open("pivot_input.pickle", "wb") as w:
+    pickle.dump(pivot_input, w)
+with open("match_df.pickle", "wb") as w2:
+    pickle.dump(match_df, w2)
+"""
+ 
+with open("pivot_input.pickle", "rb") as r:
+    pivot_input = pickle.load(r)
+with open("match_df.pickle", "rb") as r2:
+    match_df = pickle.load(r2)    
+
 pivot = pivot_input.pivot_table(index = ['userId'], columns = ['movieId'], values = 'rating')
 
 norm_pivot = pivot.apply(lambda x : (x - np.min(x)) / (np.max(x) - np.min(x)), axis = 1)
@@ -41,7 +67,18 @@ def find_title(id):
     title = match_df[match_df['movieId'] == id].title.values[0]
     return title
 
-def similar_5movies(title):
+def similar_5movies(id):
+    if type(id) != int:
+        id = find_id(id)
+    title = find_title(id)
+    movie_list = []
+    top_five = is_df[id].sort_values(ascending = False)[1:6] #[0] = movie
+    for item, score in top_five.items():
+        movie_list.append(item)
+    print(f'Similar 5 movies to \'id({id}) = {title}\' : {movie_list}\n')
+    return movie_list
+
+def similar_5movies_print(title):
     movie = find_id(title)
     num = 1
     print(f'Similar 5 movies to \'{title}\' :\n')
@@ -63,6 +100,27 @@ def similar_5users(user):
         print(f'UserId : {user} => Similarity : {similarity}')
 
 def recom_5movie(user):
+    similar_30users = us_df.sort_values(by = user, ascending = False).index[1:31]
+    movie_list = []
+    recom = {}
+    num = 0
+    
+    for i in similar_30users:
+        movies = norm_pivot.loc[:, i][(norm_pivot.loc[:, user] == 0)].sort_values(ascending = False).index[:5]
+        movie_list.append(movies.tolist())
+    
+    for i in range(len(movie_list)):
+        for j in movie_list[i]:
+            if j in recom:
+                num += 1
+            else:
+                num = 1
+            recom[j] = num
+    five_movies = sorted(recom.items(), key = lambda x:x[1], reverse = True)[:5]
+    return five_movies # [(movieId, number of recommenders), ...]
+        
+        
+def recom_5movie_print(user):
     similar_30users = us_df.sort_values(by = user, ascending = False).index[1:31]
     movie_list = []
     recom = {}
