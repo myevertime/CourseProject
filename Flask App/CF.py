@@ -99,47 +99,5 @@ def similar_5users(user):
     for user, similarity in top_five.items():
         print(f'UserId : {user} => Similarity : {similarity}')
 
-def recom_5movie(user):
-    similar_30users = us_df.sort_values(by = user, ascending = False).index[1:31]
-    movie_list = []
-    recom = {}
-    num = 0
-    
-    for i in similar_30users:
-        movies = norm_pivot.loc[:, i][(norm_pivot.loc[:, user] == 0)].sort_values(ascending = False).index[:5]
-        movie_list.append(movies.tolist())
-    
-    for i in range(len(movie_list)):
-        for j in movie_list[i]:
-            if j in recom:
-                num += 1
-            else:
-                num = 1
-            recom[j] = num
-    five_movies = sorted(recom.items(), key = lambda x:x[1], reverse = True)[:5]
-    return list(dict(five_movies)) # [movieId1, movieId2, ...]
-        
-        
-def recom_5movie_print(user):
-    similar_30users = us_df.sort_values(by = user, ascending = False).index[1:31]
-    movie_list = []
-    recom = {}
-    num = 0
-    
-    for i in similar_30users:
-        movies = norm_pivot.loc[:, i][(norm_pivot.loc[:, user] == 0)].sort_values(ascending = False).index[:5]
-        movie_list.append(movies.tolist())
-    
-    for i in range(len(movie_list)):
-        for j in movie_list[i]:
-            if j in recom:
-                num += 1
-            else:
-                num = 1
-            recom[j] = num
-    five_movies = sorted(recom.items(), key = lambda x:x[1], reverse = True)[:5]
-    for i in five_movies:
-        print('The movie \'{}\' (No. of recommenders : {})'.format(find_title(int(i[0])), i[1]))
-
 if __name__ == '__main__':
     similar_5movies('Dirty Dancing (1987)')
