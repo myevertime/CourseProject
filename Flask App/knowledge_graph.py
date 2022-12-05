@@ -19,16 +19,16 @@ def knowledge_graph(tmdb_id, imdb_id):
             r_list.extend(q_result)
         except Exception as e:
             print(e)
-    #Rank, format and return the top 10 results            
-    temp_list = [[i["movieLabel"],i["movie_id"],i["rank"]] for i in r_list]
+    #Rank, format and return the top 5 results
+    temp_list = [[i["movie_id"],i["rank"]] for i in r_list]
     r_list.clear() #clear the original r_list
-    for i, g in groupby(sorted(temp_list), key=lambda x: x[0:2]):
-        r_list.append([i,sum(v[2] for v in g)])
-    recommendations = [i[0] for i in sorted(r_list, key=lambda l:l[1], reverse=True)][:10]
-    return recommendations #return movie title + id (imdb id if exists, else tmdb id)
+    for i, g in groupby(sorted(temp_list), key=lambda x: x[0]):
+        r_list.append([i,sum(v[1] for v in g)])
+    recommendations = [i[0] for i in sorted(r_list, key=lambda l:l[1], reverse=True)][:5]
+    return recommendations #return ids (imdb_id if exists, else tmdb_id)
 
 if __name__ == '__main__':
     #Example (The Terminator)
     r_list = knowledge_graph('218', '0088247') 
     for i in r_list:
-        print(i[0],i[1])
+        print(i)
