@@ -133,6 +133,3 @@ def recom_5movie_print(user):
     five_movies = sorted(recom.items(), key = lambda x:x[1], reverse = True)[:5]
     for i in five_movies:
         print('The movie \'{}\' (No. of recommenders : {})'.format(find_title(int(i[0])), i[1]))
-
-if __name__ == '__main__':
-    similar_5movies('Dirty Dancing (1987)')
