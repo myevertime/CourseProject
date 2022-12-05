@@ -1,4 +1,4 @@
-SELECT DISTINCT ?movieLabel ?movie_id
+SELECT DISTINCT ?movie_id
 WITH 
 {
 SELECT ?item ?actors ?director
@@ -42,8 +42,6 @@ MINUS
 {
 {?movie wdt:P4947 '$TMDB'} UNION {?movie wdt:P345 '$IMDB'.}
 }
-SERVICE wikibase:label {
-     bd:serviceParam wikibase:language "en" .}
 }
 ORDER BY DESC(?count)
 LIMIT 10
