@@ -1,0 +1,87 @@
+<style>
+body{
+background:#eee;
+}                
+.search_content {
+    background-color: #FFFFFF;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #E7EAEC;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+    width: 45%;
+    position: absolute;
+    left: 0%;
+    top:  0%;
+}
+
+.hr_line_dashed {
+    border-top: 1px dashed #E7EAEC;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.recommendation_content {
+	background-color: #FFFFFF;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #E7EAEC;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+    width: 45%;
+    position: absolute;
+    left: 50%;
+    top:  0%;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 100;
+}
+
+h2 {
+	font-size: 20px;
+    font-weight: 100;
+}
+
+p {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+</style>
+
+<html>
+    <div class="search_content">
+        <h1>{{ length }} results found for: {{ search }}</span></h2>
+
+        <div class="hr_line_dashed"></div>
+        {% for movie in results %}
+            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
+            <p>{{ movie.director }}</p>
+            <p>{{ movie.cast }}</p>
+            <p>{{ movie.description }}</p>
+        <div class="hr_line_dashed"></div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="recommendation_content">
+        <h1>You may also be interested in these movies:</h1>
+
+        <div class="hr_line_dashed"></div>
+        {% for movie in recommendations %}
+            <h2><a href="#">{{ movie.title }} | {{ movie.year }}</a></h2>
+            <p>{{ movie.director }}</p>
+            <p>{{ movie.cast }}</p>
+            <p>{{ movie.description }}</p>
+        <div class="hr_line_dashed"></div>
+        {% endfor %}
+        </div>
+    </div>
+
+</html>
