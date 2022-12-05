@@ -1,4 +1,4 @@
-SELECT ?movie_id
+SELECT ?movieLabel ?movie_id
 WHERE
 {
 {?item wdt:P4947 '$TMDB'.}
@@ -25,7 +25,8 @@ MINUS
 {?movie wdt:P4947 '$TMDB'} UNION {?movie wdt:P345 '$IMDB'.}
 }
 
+SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
 }
-GROUP BY ?movie_id
+GROUP BY ?movieLabel ?movie_id
 ORDER BY DESC(COUNT(?character))
 LIMIT 10
