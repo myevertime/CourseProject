@@ -53,13 +53,8 @@ source {{virtual_env_name}}/bin/activate
 cd CourseProject
 pip install -r requirements.txt
 ```
-5. Execute search server in background
-```bash
-cd search
-nohup python search_server.py &
-```
 
-6. Execute GUI server
+5. Execute server
 ```bash
 cd ../Flask\ App
 python main.py
