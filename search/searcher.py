@@ -5,7 +5,7 @@ movie_data_filename = "normalized_data.csv"
 class Searcher:
     def __init__(self, cfg):
         self.inv_idx = metapy.index.make_inverted_index(cfg)
-        self.ranker = metapy.index.OkapiBM25()
+        self.ranker = metapy.index.OkapiBM25(k1=1.2,b=0.3,k3=6)
         print('make make_inverted_index')
         print('num docs:', self.inv_idx.num_docs())
         print('num vocabularies:', self.inv_idx.unique_terms())
