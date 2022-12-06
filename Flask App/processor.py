@@ -4,7 +4,7 @@ import pandas as pd
 import time
 from search_client import SearchClient
 
-searcher = SearchClient('http://localhost', '8090')
+searcher = SearchClient('http://54.68.224.178', '8090')
 
 def processor(keyword=''):
 
