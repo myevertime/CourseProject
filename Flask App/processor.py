@@ -6,6 +6,7 @@ def processor(keyword=''):
 
     import pandas as pd
 
+    print('before search')
     search_result = search(keyword)
 
     metadata = pd.read_csv("output_rendered.csv")
@@ -54,3 +55,6 @@ def processor(keyword=''):
         recommendations.append(result)
 
     return results , recommendations
+
+if __name__=='__main__':
+    print(processor('jumanji'))
