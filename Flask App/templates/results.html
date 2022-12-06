@@ -75,7 +75,7 @@ p {
         <div class="hr_line_dashed"></div>
         {% for movie in results %}
             <h3>{{ movie.title }}</h2>
-            <p>Genre: {{ movie.genre}}
+            <p>Genre: {{ movie.genres}}
             <p>Director: {{ movie.director }}</p>
             <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
@@ -92,7 +92,7 @@ p {
         <div class="hr_line_dashed"></div>
         {% for movie in recommendations %}
             <h3>{{ movie.title }}</h3>
-            <p>Genre: {{ movie.genre}}
+            <p>Genre: {{ movie.genres}}
             <p>Director: {{ movie.director }}</p>
             <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
