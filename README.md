@@ -34,7 +34,35 @@ Above link is only accessible with Google Apps@Illinois.
 3) ratings.csv : User ratings for the collaborative filtering system 
 
 #### How to run?
+Tested python version: `3.7.15`
+
 1. git clone this repo
-2. install packages: pip install requirements.txt
-3. Execute main.py: python main.py
-4. Run http://127.0.0.1:5000/ on browser
+
+2. create a virtual environment in the current directory.
+```bash
+python3.7 -m venv {{virtual_env_name}}
+```
+
+3. activate virtual environment
+```
+source {{virtual_env_name}}/bin/activate
+```
+
+4. install packages
+```bash
+cd CourseProject
+pip install -r requirements.txt
+```
+5. Execute search server in background
+```bash
+cd search
+nohup python search_server.py &
+```
+
+6. Execute GUI server
+```bash
+cd ../Flask\ App
+python main.py
+```
+
+Now, you can type in `http://127.0.0.1:5000/` in Chrome browser to get the search page where you can type in queries.

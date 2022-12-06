@@ -1,16 +1,16 @@
 from CF import similar_5movies
 from knowledge_graph import knowledge_graph
-from searcher import search
 import pandas as pd
 import time
+from search_client import SearchClient
+
+searcher = SearchClient('http://localhost', '8090')
 
 def processor(keyword=''):
 
-    # start_time = time.time()
-    # search_result = search(keyword)
-    # print("--- %s seconds --- for search" % (time.time() - start_time))
-
-    search_result = [2]
+    start_time = time.time()
+    search_result = searcher.search(keyword)
+    print("--- %s seconds --- for search" % (time.time() - start_time))
 
     metadata = pd.read_csv("output_rendered.csv")
 
@@ -64,7 +64,7 @@ def processor(keyword=''):
 
     return results, recommendations
 
-# if __name__=='__main__':
-#     start_time = time.time()
-#     print(processor('jumanji'))
-#     print("--- %s seconds --- for main" % (time.time() - start_time))
+if __name__=='__main__':
+    start_time = time.time()
+    print(processor('jumanji'))
+    print("--- %s seconds --- for main" % (time.time() - start_time))
