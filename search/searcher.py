@@ -24,9 +24,7 @@ class Searcher:
     def search(self,raw_query):
         query = metapy.index.Document()
         query.content(raw_query)
-        print('before')
-        top_docs = self.ranker.score(self.inv_idx, query, num_results=5)
-        print('after')
+        top_docs = self.ranker.score(self.inv_idx, query, num_results=10)
         results = []
         for _, (d_id, _) in enumerate(top_docs):
             content = self.find_movie(movie_data_filename, d_id+1)
