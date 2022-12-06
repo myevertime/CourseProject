@@ -1,13 +1,16 @@
 from CF import similar_5movies
 from knowledge_graph import knowledge_graph
 from searcher import search
+import pandas as pd
+import time
 
 def processor(keyword=''):
 
-    import pandas as pd
+    # start_time = time.time()
+    # search_result = search(keyword)
+    # print("--- %s seconds --- for search" % (time.time() - start_time))
 
-    print('before search')
-    search_result = search(keyword)
+    search_result = [2]
 
     metadata = pd.read_csv("output_rendered.csv")
 
@@ -27,8 +30,13 @@ def processor(keyword=''):
     imdb_id = str(metadata.loc[metadata['movieId'] == search_result[0], 'imdbId'].item())
 
     ## Get Top5 movie IDs from each model
+    start_time = time.time()
     CF_reco = similar_5movies(search_result[0])
+    print("--- %s seconds --- for CF" % (time.time() - start_time))
+
+    start_time = time.time()
     kg_reco = knowledge_graph(tmdb_id, imdb_id)
+    print("--- %s seconds --- for KG" % (time.time() - start_time))
     
     ## Map KG recommendation results to MovieID
     kg_reco_pro = []
@@ -54,7 +62,9 @@ def processor(keyword=''):
         result['actors'] = metadata.loc[metadata['movieId'] == reco[i], 'actors'].item()
         recommendations.append(result)
 
-    return results , recommendations
+    return results, recommendations
 
-if __name__=='__main__':
-    print(processor('jumanji'))
+# if __name__=='__main__':
+#     start_time = time.time()
+#     print(processor('jumanji'))
+#     print("--- %s seconds --- for main" % (time.time() - start_time))

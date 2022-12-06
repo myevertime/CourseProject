@@ -27,8 +27,8 @@ def knowledge_graph(tmdb_id, imdb_id):
     recommendations = [i[0] for i in sorted(r_list, key=lambda l:l[1], reverse=True)][:5]
     return recommendations #return ids (imdb_id if exists, else tmdb_id)
 
-if __name__ == '__main__':
-    #Example (The Terminator)
-    r_list = knowledge_graph('218', '0088247') 
-    for i in r_list:
-        print(i)
+# if __name__ == '__main__':
+#     #Example (The Terminator)
+#     r_list = knowledge_graph('218', '0088247') 
+#     for i in r_list:
+#         print(i)

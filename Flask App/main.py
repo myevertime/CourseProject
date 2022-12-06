@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
-#from processor import processor
+from processor import processor
 
 app = Flask(__name__)
 
@@ -21,39 +21,39 @@ def results():
     # results, recommendations = processor(search)
     #################################################
 
-    results = [
-        {
-            'title': 'Movie Title 1',
-            'genre': 'adventure',
-            'director': 'Director 1',
-            'actors': 'Cast1, Cast2',
-        },
+    # results = [
+    #     {
+    #         'title': 'Movie Title 1',
+    #         'genre': 'adventure',
+    #         'director': 'Director 1',
+    #         'actors': 'Cast1, Cast2',
+    #     },
 
-        {
-            'title': 'Movie Title 2',
-            'genre': 'thriller',
-            'director': 'Director 2',
-            'actors': 'Cast1, Cast2',
-        }
-    ]
+    #     {
+    #         'title': 'Movie Title 2',
+    #         'genre': 'thriller',
+    #         'director': 'Director 2',
+    #         'actors': 'Cast1, Cast2',
+    #     }
+    # ]
 
-    recommendations = [
-        {
-            'title': 'Movie Title 3',
-            'year': '2020',
-            'director': 'Director 3',
-            'actors': 'Cast1, Cast2',
-        },
+    # recommendations = [
+    #     {
+    #         'title': 'Movie Title 3',
+    #         'year': '2020',
+    #         'director': 'Director 3',
+    #         'actors': 'Cast1, Cast2',
+    #     },
 
-        {
-            'title': 'Movie Title 4',
-            'year': '2019',
-            'director': 'Director 4',
-            'actors': 'Cast1, Cast2',
-        }
-    ]
+    #     {
+    #         'title': 'Movie Title 4',
+    #         'year': '2019',
+    #         'director': 'Director 4',
+    #         'actors': 'Cast1, Cast2',
+    #     }
+    # ]
 
-    #results, recommendations = processor(search)
+    results, recommendations = processor(search)
     length=len(results)
 
     return render_template("results.html", search=search, length=length, results=results, recommendations=recommendations)

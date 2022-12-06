@@ -99,5 +99,5 @@ def similar_5users(user):
     for user, similarity in top_five.items():
         print(f'UserId : {user} => Similarity : {similarity}')
 
-if __name__ == '__main__':
-    similar_5movies('Dirty Dancing (1987)')
+# if __name__ == '__main__':
+#     similar_5movies('Dirty Dancing (1987)')
