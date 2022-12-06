@@ -3,7 +3,16 @@ import json
 
 inv_idx = metapy.index.make_inverted_index('config.toml')
 ranker = metapy.index.OkapiBM25()
-movie_data = open('normalized_data.csv', 'r').readlines()
+movie_data_filename = "normalized_data.csv"
+
+def find_movie(filename, idx):
+    cnt = 0
+    with open(filename, 'r') as f:
+        for line in f:
+            if (idx == cnt):
+                return line.split(",")
+            else:
+                cnt = cnt + 1
 
 def search(raw_query):
     query = metapy.index.Document()
@@ -11,7 +20,7 @@ def search(raw_query):
     top_docs = ranker.score(inv_idx, query, num_results=5)
     results = []
     for _, (d_id, _) in enumerate(top_docs):
-        content = movie_data[d_id+1].split(",")
+        content = find_movie(movie_data_filename, d_id+1)
         movie_id = content[0]
         results.append(int(movie_id))
     return results
