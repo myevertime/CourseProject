@@ -32,3 +32,9 @@ Above link is only accessible with Google Apps@Illinois.
 1) corpus.txt : A list of movies along with information such as tags, genres, and names of cast and directors for our BM25 model
 2) output.csv : Additional movie info for the collaborative filtering system
 3) ratings.csv : User ratings for the collaborative filtering system 
+
+#### How to run?
+1. git clone this repo
+2. install packages: pip install requirements.txt
+3. Execute main.py: python main.py
+4. Run http://127.0.0.1:5000/ on browser
