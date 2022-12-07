@@ -10,29 +10,36 @@ background: white;
     padding: 15px 20px 20px 20px;
     border-color: #E7EAEC;
     border-image: none;
-    border-style: solid solid none;
+    border-style: solid solid solid;
     border-width: 1px 0px;
     width: 45%;
     position: absolute;
-    left: 0%;
+    left: 1%;
     top:  10%;
 }
 
 .hr_line_dashed {
-    border-top: 1px dashed #E7EAEC;
-    color: #ffffff;
-    background-color: #ffffff;
-    height: 1px;
+    border-top: 1px dashed black;
+    color: #fff;
+    background-color: #fff;
+    height: 2px;
     margin: 20px 0;
 }
 
+.hr_line_solid {
+    border-top: 1px solid black;
+    color: #fff;
+    background-color: #fff;
+    height: 1px;
+    margin: 20px 0;
+}
 .recommendation_content {
 	background-color: #FFFFFF;
     color: inherit;
     padding: 15px 20px 20px 20px;
     border-color: #E7EAEC;
     border-image: none;
-    border-style: solid solid none;
+    border-style: solid solid solid;
     border-width: 1px 0px;
     width: 45%;
     position: absolute;
@@ -53,12 +60,11 @@ h2 {
 h3 {
     font-size: 18px;
     font-weight: bold;
-    text-decoration: underline;
 }
 
 p {
     font-size: 16px;
-    margin-top: 5px;
+    line-height: 0.5;
 }
 
 </style>
@@ -68,14 +74,14 @@ p {
 
     <div class="search_content">
         <h1>Search Results</h1>
-        <div class="hr_line_dashed"></div>
+        <div class="hr_line_solid"></div>
 
-        <h2>{{ length }} result(s) found for: "{{ search }}"</span></h2>
+        <h2>{{ length }} movie(s) found for: "{{ search }}"</span></h2>
 
         <div class="hr_line_dashed"></div>
         {% for movie in results %}
             <h3>{{ movie.title }}</h2>
-            <p>Genre: {{ movie.genres}}
+            <p>Genre: {{ movie.genres}}</p>
             <p>Director: {{ movie.director }}</p>
             <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
@@ -85,14 +91,14 @@ p {
 
     <div class="recommendation_content">
         <h1>Recommendations</h1>
-        <div class="hr_line_dashed"></div>
+        <div class="hr_line_solid"></div>
 
-        <h2>You may also be interested in these movies:</h2>
+        <h2>Movie(s) similar to the top search result:</h2>
 
         <div class="hr_line_dashed"></div>
         {% for movie in recommendations %}
             <h3>{{ movie.title }}</h3>
-            <p>Genre: {{ movie.genres}}
+            <p>Genre: {{ movie.genres}}</p>
             <p>Director: {{ movie.director }}</p>
             <p>Cast: {{ movie.actors }}</p>
         <div class="hr_line_dashed"></div>
