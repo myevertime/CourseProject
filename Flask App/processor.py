@@ -10,6 +10,9 @@ def processor(keyword=''):
 
     start_time = time.time()
     search_result = searcher.search(keyword)
+    if len(search_result) == 0:
+        raise Exception("empty search result")
+
     print("--- %s seconds --- for search" % (time.time() - start_time))
 
     metadata = pd.read_csv("output_rendered.csv")
