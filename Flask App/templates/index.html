@@ -56,14 +56,8 @@ form.search::after {
 
 <form class="search" action="{{ url_for('results') }}" method="post">
     <h2>Movie Search and Recommendation System</h2>
-    <input type="text" class="name-input name mb-3" id="search" name="search" placeholder="You can search by movie title, cast, director, etc....">
+    <input type="text" class="name-input name mb-3" id="search" name="search" placeholder="You can search by movie title, cast, director, etc...." required="required">
     <button id="submit_button" type="submit"><i class="fa fa-search"></i></button>
 </form>
-
-<script>
-function ClearFields() {
-  document.getElementById("search").value = "";
-}
-</script>
 
 </html>
