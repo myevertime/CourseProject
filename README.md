@@ -33,10 +33,12 @@ The link above is only accessible with Google Apps@Illinois.
 2) output.csv : Additional movie info for the collaborative filtering system
 3) ratings.csv : User ratings for the collaborative filtering system 
 
-#### Voiced PPT Presentation
+#### Voiced PPT Presentation and Final Report
 Video file is availble in https://drive.google.com/file/d/1-hNj31QeOhPG5sWdarM1WUdMHIGtkDuG/view?usp=sharing
 
 The link above is only accessible with Google Apps@Illinois.
+
+Detailed documentation is captured in the "CS410 Project Final Report.pdf" file in the root directory of this GitHub repo.
 
 #### How to run?
 Tested python version: `3.7.15` in Visual Studio.
